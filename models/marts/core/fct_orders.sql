@@ -2,13 +2,13 @@
 -- customer_id
 -- amount (hint: this has to come from payments)
 
-orders as (
+with orders as (
 
     select * from {{ ref('stg_orders') }}
 
 ),
 
-with payments as (
+payments as (
 
     select * from {{ ref('stg_payments')}}
 
