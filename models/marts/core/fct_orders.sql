@@ -14,12 +14,14 @@ customer_payments as (
 
     select
         customer_id,
+        order_id,
 
         sum(amount) as amount
 
     from payments
 
-    group by 1
+    group by customer_id,
+             order_id
 
 ),
 
