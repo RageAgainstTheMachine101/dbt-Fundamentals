@@ -1,7 +1,3 @@
--- order_id
--- customer_id
--- amount (hint: this has to come from payments)
-
 with orders as (
 
     select * from {{ ref('stg_orders') }}
@@ -30,7 +26,7 @@ customer_payments as (
 final as (
 
     select
-        orders.order_id
+        orders.order_id,
         orders.customer_id,
         coalesce(customer_payments.amount, 0) as amount
 
