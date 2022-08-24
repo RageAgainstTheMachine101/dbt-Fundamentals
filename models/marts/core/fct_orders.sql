@@ -10,18 +10,16 @@ payments as (
 
 ),
 
-customer_payments as (
+order_payments as (
 
     select
-        customer_id,
         order_id,
 
         sum(amount) as amount
 
     from payments
 
-    group by customer_id,
-             order_id
+    group by order_id
 
 ),
 
@@ -30,11 +28,11 @@ final as (
     select
         orders.order_id,
         orders.customer_id,
-        coalesce(customer_payments.amount, 0) as amount
+        coalesce(order_payments.amount, 0) as amount
 
     from orders
 
-    left join customer_payments using (customer_id)
+    left join order_payments using (order_id)
 
 )
 
