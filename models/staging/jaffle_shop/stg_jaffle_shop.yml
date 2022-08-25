@@ -19,6 +19,9 @@ models:
           - relationships:
               to: ref('stg_customers')
               field: customer_id
+      - name: order_date
+        tests:
+          - not_null
       - name: status
         tests:
           - accepted_values:

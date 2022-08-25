@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: stg_payments
+    columns: 
+      - name: payment_id
+        tests:
+          - unique
+          - not_null
+      - name: payment_method
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - credit_card
+                - bank_transfer
+                - coupon
+                - gift_card
+      - name: status
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - success
+                - fail
+      - name: created_at
+        tests:
+          - not_null
