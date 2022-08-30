@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Raw customers data, one line per customer.
+    columns: 
+      - name: customer_id
+        description: stg_customers primary key. 
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_orders
+    description: Raw orders data.
+    columns:
+      - name: order_id
+        description: stg_orders primari key.
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: order_date
+        tests:
+          - not_null
+      - name: status
+        description: "{{ doc('order_status') }}"
+        tests:
+          - accepted_values:
+              values:
+                - completed
+                - shipped
+                - returned
+                - return_pending
+                - placed
